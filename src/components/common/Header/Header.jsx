@@ -1,12 +1,15 @@
 import { InputGroup } from "@/components/ui/input-group";
-import { Flex, Avatar, Input } from "@chakra-ui/react";
+import { Avatar, Input } from "@chakra-ui/react";
 import { LuSearch } from "react-icons/lu";
+
+import styles from "./Header.module.css";
 
 function Header() {
   return (
-    <Flex direction="row" gap="120px" padding="22px 64px">
+    <div className={styles.container}>
       <InputGroup endElement={<LuSearch />} width="full">
         <Input
+          className={styles.input}
           placeholder="Search"
           size="lg"
           borderRadius="8px"
@@ -19,7 +22,7 @@ function Header() {
         <Avatar.Fallback />
         <Avatar.Image />
       </Avatar.Root>
-    </Flex>
+    </div>
   );
 }
 

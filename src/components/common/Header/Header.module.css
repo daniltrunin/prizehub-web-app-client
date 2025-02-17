@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  column-gap: 120px;
+
+  padding: 22px 64px;
+
+  width: 100%;
+}
+
+.input::selection {
+  color: black;
+  background-color: white;
+}
