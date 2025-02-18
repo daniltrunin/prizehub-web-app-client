@@ -10,7 +10,7 @@ function Header() {
       <InputGroup endElement={<LuSearch />} width="full">
         <Input
           className={styles.input}
-          placeholder="Search"
+          placeholder="Поиск"
           size="lg"
           borderRadius="8px"
           fontFamily="Inter"
