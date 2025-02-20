@@ -2,14 +2,16 @@ import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Main from "./views/Main/Main";
+import MainView from "./views/MainView/MainView";
+import ProfileView from "./views/ProfileView/ProfileView";
 
 function App() {
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<MainView />} />
+          <Route path="/profile" element={<ProfileView />} />
         </Routes>
       </BrowserRouter>
     </div>
