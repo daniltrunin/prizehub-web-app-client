@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.input-group {
+  max-width: 900px;
+}
+
 .input::selection {
   color: black;
   background-color: white;

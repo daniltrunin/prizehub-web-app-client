@@ -1,13 +1,17 @@
 import "./App.css";
 
-import Header from "./components/common/Header/Header";
-import Sidebar from "./components/common/Sidebar/Sidebar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Main from "./views/Main/Main";
 
 function App() {
   return (
     <div className="app">
-      <Sidebar />
-      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

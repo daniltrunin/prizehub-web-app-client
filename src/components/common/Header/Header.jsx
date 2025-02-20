@@ -7,7 +7,11 @@ import styles from "./Header.module.css";
 function Header() {
   return (
     <div className={styles.container}>
-      <InputGroup endElement={<LuSearch />} width="full">
+      <InputGroup
+        className={styles["input-group"]}
+        endElement={<LuSearch />}
+        width="full"
+      >
         <Input
           className={styles.input}
           placeholder="Поиск"
