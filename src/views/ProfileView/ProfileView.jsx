@@ -5,6 +5,7 @@ import { useState } from "react";
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return <div>{isLoggedIn ? <Profile /> : <LoginWindow />}</div>;
 }
 
