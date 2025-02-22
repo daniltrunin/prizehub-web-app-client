@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Input, Button } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
+import { Checkbox } from "@/components/ui/checkbox";
 import loginRequest from "../../../services/loginRequest";
 
 export default function LoginForm() {
@@ -11,6 +12,7 @@ export default function LoginForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    /* Сделать проверку на отсутствие пробелов и сделать нижний регистр, также вынести в отдельную функцию */
     const data = {
       username: username,
       password: password,
@@ -39,6 +41,7 @@ export default function LoginForm() {
         placeholder="Пароль"
         variant="subtle"
       />
+      <Checkbox variant="subtle">Запомнить вход</Checkbox>
       <Button width="full" type="submit">
         Подтвердить
       </Button>

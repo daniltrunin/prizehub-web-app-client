@@ -1,6 +1,7 @@
 import { InputGroup } from "@/components/ui/input-group";
 import { Avatar, Input } from "@chakra-ui/react";
 import { LuSearch } from "react-icons/lu";
+import { Link } from "react-router-dom"
 
 import styles from "./Header.module.css";
 
@@ -22,10 +23,12 @@ function Header() {
         />
       </InputGroup>
 
-      <Avatar.Root colorPalette="blue" size="lg" cursor="pointer">
-        <Avatar.Fallback />
-        <Avatar.Image />
-      </Avatar.Root>
+      <Link to="/profile">
+        <Avatar.Root colorPalette="blue" size="lg" cursor="pointer">
+          <Avatar.Fallback />
+          <Avatar.Image />
+        </Avatar.Root>
+      </Link>
     </div>
   );
 }
