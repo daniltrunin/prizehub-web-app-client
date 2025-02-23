@@ -5,9 +5,11 @@ import {
   PasswordInput,
   PasswordStrengthMeter,
 } from "@/components/ui/password-input";
-import { Checkbox } from "@/components/ui/checkbox";
+import { CheckboxCard } from "@/components/ui/checkbox-card";
 import { useState } from "react";
+import formUser from "../../../services/formUser";
 import registerRequest from "../../../services/registerRequest";
+import setSessionStorage from "../../../services/sessionStorage";
 import zxcvbn from "zxcvbn";
 
 export default function RegisterForm() {
@@ -16,13 +18,13 @@ export default function RegisterForm() {
 
   const passwordStrength = zxcvbn(password).score;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const data = {
-      username: username,
-      password: password,
-    };
-    console.log(registerRequest(data));
+
+    const data = await formUser(username, password);
+    const res = await registerRequest(data);
+    console.log(res);
+    setSessionStorage(username, password);
 
     /* Очистить строку */
     setUsername("");
@@ -49,7 +51,12 @@ export default function RegisterForm() {
         />
         <PasswordStrengthMeter width="full" value={passwordStrength} />
       </Stack>
-      <Checkbox variant="subtle">Запомнить вход</Checkbox>
+      <CheckboxCard
+        label="Запомнить вход"
+        maxW="full"
+        size="sm"
+        variant="outline"
+      />
       <Button width="full" type="submit">
         Подтвердить
       </Button>

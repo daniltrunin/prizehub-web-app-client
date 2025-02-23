@@ -3,21 +3,22 @@
 import { useState } from "react";
 import { Input, Button } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
-import { Checkbox } from "@/components/ui/checkbox";
-import loginRequest from "../../../services/loginRequest";
+import { CheckboxCard } from "@/components/ui/checkbox-card";
+import formUser from "../../../services/formUser";
+import loginRequest from "@/services/loginRequest";
+import setSessionStorage from "../../../services/sessionStorage";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    /* Сделать проверку на отсутствие пробелов и сделать нижний регистр, также вынести в отдельную функцию */
-    const data = {
-      username: username,
-      password: password,
-    };
-    console.log(loginRequest(data));
+
+    const data = await formUser(username, password);
+    const res = await loginRequest(data);
+    console.log(res);
+    setSessionStorage(username, password);
 
     /* Очистить строку */
     setUsername("");
@@ -41,7 +42,12 @@ export default function LoginForm() {
         placeholder="Пароль"
         variant="subtle"
       />
-      <Checkbox variant="subtle">Запомнить вход</Checkbox>
+      <CheckboxCard
+        label="Запомнить вход"
+        maxW="full"
+        size="sm"
+        variant="outline"
+      />
       <Button width="full" type="submit">
         Подтвердить
       </Button>

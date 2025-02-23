@@ -1,8 +1,8 @@
 /* Главное окно логина */
 
 import { Tabs } from "@chakra-ui/react";
-import LoginForm from "../SignOn/Login";
-import RegisterForm from "../SignOn/Register";
+import LoginForm from "../Identification/Login";
+import RegisterForm from "../Identification/Register";
 
 function LoginWindow() {
   return (
