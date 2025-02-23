@@ -11,7 +11,15 @@ import setSessionStorage from "../../../services/sessionStorage";
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
+  /* Нажатие чекбокса */
+  const handleChange = (e) => {
+    setIsChecked(e.target.checked); // Теперь состояние обновляется
+    console.log(`Чекбокс ${e.target.checked ? "активен" : "неактивен"}`);
+  };
+
+  /* Отправка сабмита */
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -20,9 +28,18 @@ export default function LoginForm() {
     console.log(res);
     setSessionStorage(username, password);
 
+    if (isChecked) {
+      setSessionStorage(username, password);
+      console.log(`Запомнил ${username} и ${password}`);
+    } else if (!isChecked) {
+      console.log(`Не запомнил ${username} и ${password}`);
+      return;
+    }
+
     /* Очистить строку */
     setUsername("");
     setPassword("");
+    setIsChecked(false);
   }
 
   return (
@@ -47,6 +64,8 @@ export default function LoginForm() {
         maxW="full"
         size="sm"
         variant="outline"
+        onChange={handleChange}
+        checked={isChecked}
       />
       <Button width="full" type="submit">
         Подтвердить
