@@ -24,25 +24,27 @@ export default function LoginForm() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const data = await formUser(username, password);
-    const res = await loginRequest(data);
-    console.log(res);
-    setSessionStorage(username, password);
-
-    if (isChecked) {
+    if (password && username) {
+      const data = await formUser(username, password);
+      const res = await loginRequest(data);
+      console.log(res);
       setSessionStorage(username, password);
-      console.log(
-        `Запомнил ${username} и ${password} с чекбоксом ${isChecked}`
-      );
-    } else if (!isChecked) {
-      console.log(`Не запомнил ${username} и ${password}`);
-      return;
-    }
 
-    /* Очистить строку */
-    setUsername("");
-    setPassword("");
-    setIsChecked(false);
+      if (isChecked) {
+        setSessionStorage(username, password);
+        console.log(`Отправил ${username} и ${password} с сохранением сессии`);
+      } else if (!isChecked) {
+        console.log(`Отправил ${username} и ${password} без сохранения сессии`);
+        return;
+      }
+
+      /* Очистить строку */
+      setUsername("");
+      setPassword("");
+      setIsChecked(false);
+    } else if (!password.length || !username.length) {
+      alert("Заполните все поля");
+    }
   }
 
   return (
