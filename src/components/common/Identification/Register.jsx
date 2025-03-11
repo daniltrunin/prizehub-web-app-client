@@ -17,6 +17,7 @@ export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const passwordStrength = zxcvbn(password).score;
 
@@ -57,16 +58,28 @@ export default function RegisterForm() {
     >
       <Input
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => {
+          setUsername(e.target.value);
+          setHasError(e.target.value.trim().length === 0);
+        }}
         placeholder="Юзернейм"
-        variant="subtle"
+        variant="filled"
+        style={{
+          border: hasError ? "1px solid #E82E2E" : null,
+        }}
       />
       <Stack>
         <PasswordInput
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setHasError(e.target.value.trim().length === 0);
+          }}
           placeholder="Пароль"
-          variant="subtle"
+          variant="filled"
+          style={{
+            border: hasError ? "1px solid #E82E2E" : null,
+          }}
         />
         <PasswordStrengthMeter width="full" value={passwordStrength} />
       </Stack>
