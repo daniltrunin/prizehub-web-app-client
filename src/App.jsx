@@ -8,12 +8,17 @@ import ProfileView from "./views/ProfileView/ProfileView";
 
 function App() {
   // если есть данные в sessionStorage, то открывает default, если нет, то открывает /profile
-  const [session, setSession] = useState(false);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
-    let data = sessionStorage.getItem("username") === "true";
+    // более короткая запись варианта: let data = sessionStorage.getItem("username") !== null;
+    let data = !!sessionStorage.getItem("username");
     setSession(data);
   }, []);
+
+  if (session === null) {
+    return <div style={{ marginTop: "50px" }}>Загрузка...</div>;
+  }
 
   return (
     <div className="app">
@@ -21,7 +26,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={!session ? <Navigate to="/profile" /> : <MainView />}
+            element={session ? <MainView /> : <Navigate to="/profile" />}
           />
           <Route path="/profile" element={<ProfileView />} />
         </Routes>
