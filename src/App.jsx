@@ -28,10 +28,7 @@ function App() {
             path="/"
             element={loggedIn ? <MainView /> : <Navigate to="/profile" />}
           />
-          <Route
-            path="/profile"
-            element={<ProfileView setLoggedIn={setLoggedIn} />}
-          />
+          <Route path="/profile" element={<ProfileView />} />
         </Routes>
       </BrowserRouter>
     </div>

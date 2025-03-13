@@ -1,7 +1,6 @@
 /* Форма логина */
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
 import { CheckboxCard } from "@/components/ui/checkbox-card";
@@ -11,7 +10,6 @@ import setSessionStorage from "../../../services/sessionStorage";
 import setLocalStorage from "../../../services/localStorage";
 
 export default function LoginForm() {
-  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -23,12 +21,11 @@ export default function LoginForm() {
     console.log(`Чекбокс ${e.target.checked ? "активен" : "неактивен"}`);
   };
 
-  async function resetFormAndNavigate() {
+  async function resetForm() {
     setUsername("");
     setPassword("");
     setIsChecked(false);
-    await navigate("/");
-    console.log("reset form and navigate");
+    console.log("reset form");
   }
 
   /* Отправка сабмита */
@@ -45,7 +42,7 @@ export default function LoginForm() {
         await setLocalStorage(username, password);
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
       }
-      await resetFormAndNavigate();
+      await resetForm();
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
     }

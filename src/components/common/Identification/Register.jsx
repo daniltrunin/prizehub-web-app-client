@@ -12,6 +12,7 @@ import registerRequest from "../../../services/registerRequest";
 import zxcvbn from "zxcvbn";
 
 import setSessionStorage from "../../../services/sessionStorage";
+import setLocalStorage from "../../../services/localStorage";
 
 export default function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -27,29 +28,28 @@ export default function RegisterForm() {
     console.log(`Чекбокс ${e.target.checked ? "активен" : "неактивен"}`);
   };
 
+  async function resetForm() {
+    setUsername("");
+    setPassword("");
+    setIsChecked(false);
+    console.log("reset form");
+  }
+
   /* Отправка сабмита */
   async function handleSubmit(event) {
     event.preventDefault();
 
     if (password && username) {
-      /* Сформировать и отправить запрос */
       const data = await formUser(username, password);
       const res = await registerRequest(data);
       console.log(res);
-      setSessionStorage(username, password);
+      await setSessionStorage(username, password);
 
       if (isChecked) {
-        setSessionStorage(username, password);
+        await setLocalStorage(username, password);
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
-      } else if (!isChecked) {
-        console.log(`Отправил ${username} и ${password} без сохранения сессии`);
-        return;
       }
-
-      /* Очистить строку */
-      setUsername("");
-      setPassword("");
-      setIsChecked(false);
+      await resetForm();
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
     }
