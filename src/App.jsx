@@ -8,15 +8,15 @@ import ProfileView from "./views/ProfileView/ProfileView";
 
 function App() {
   // если есть данные в sessionStorage, то открывает default, если нет, то открывает /profile
-  const [session, setSession] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(null);
 
   useEffect(() => {
     // более короткая запись варианта: let data = sessionStorage.getItem("username") !== null;
     let data = !!sessionStorage.getItem("username");
-    setSession(data);
+    setLoggedIn(data);
   }, []);
 
-  if (session === null) {
+  if (loggedIn === null) {
     return <div style={{ marginTop: "50px" }}>Загрузка...</div>;
   }
 
@@ -26,9 +26,12 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={session ? <MainView /> : <Navigate to="/profile" />}
+            element={loggedIn ? <MainView /> : <Navigate to="/profile" />}
           />
-          <Route path="/profile" element={<ProfileView />} />
+          <Route
+            path="/profile"
+            element={<ProfileView setLoggedIn={setLoggedIn} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,14 +1,17 @@
 /* Форма логина */
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
 import { CheckboxCard } from "@/components/ui/checkbox-card";
 import formUser from "../../../services/formUser";
 import loginRequest from "@/services/loginRequest";
 import setSessionStorage from "../../../services/sessionStorage";
+import setLocalStorage from "../../../services/localStorage";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -20,6 +23,14 @@ export default function LoginForm() {
     console.log(`Чекбокс ${e.target.checked ? "активен" : "неактивен"}`);
   };
 
+  async function resetFormAndNavigate() {
+    setUsername("");
+    setPassword("");
+    setIsChecked(false);
+    await navigate("/");
+    console.log("reset form and navigate");
+  }
+
   /* Отправка сабмита */
   async function handleSubmit(event) {
     event.preventDefault();
@@ -28,20 +39,13 @@ export default function LoginForm() {
       const data = await formUser(username, password);
       const res = await loginRequest(data);
       console.log(res);
-      setSessionStorage(username, password);
+      await setSessionStorage(username, password);
 
       if (isChecked) {
-        setSessionStorage(username, password);
+        await setLocalStorage(username, password);
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
-      } else if (!isChecked) {
-        console.log(`Отправил ${username} и ${password} без сохранения сессии`);
-        return;
       }
-
-      /* Очистить строку */
-      setUsername("");
-      setPassword("");
-      setIsChecked(false);
+      await resetFormAndNavigate();
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
     }
