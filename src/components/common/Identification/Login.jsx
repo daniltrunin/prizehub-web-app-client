@@ -9,7 +9,7 @@ import loginRequest from "@/services/loginRequest";
 import setSessionStorage from "../../../services/sessionStorage";
 import setLocalStorage from "../../../services/localStorage";
 
-export default function LoginForm() {
+export default function LoginForm({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -43,6 +43,7 @@ export default function LoginForm() {
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
       }
       await resetForm();
+      setIsLoggedIn(true);
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
     }

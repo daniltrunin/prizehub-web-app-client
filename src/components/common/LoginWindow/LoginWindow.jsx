@@ -23,7 +23,7 @@ function LoginWindow({ setIsLoggedIn }) {
           <Tabs.Trigger value="register">Регистрация</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="login">
-          <LoginForm />
+          <LoginForm setIsLoggedIn={setIsLoggedIn} />
         </Tabs.Content>
         <Tabs.Content value="register">
           <RegisterForm setIsLoggedIn={setIsLoggedIn} />
