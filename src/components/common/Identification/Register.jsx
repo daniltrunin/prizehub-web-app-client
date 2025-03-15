@@ -14,7 +14,7 @@ import zxcvbn from "zxcvbn";
 import setSessionStorage from "../../../services/sessionStorage";
 import setLocalStorage from "../../../services/localStorage";
 
-export default function RegisterForm() {
+export default function RegisterForm({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -50,6 +50,7 @@ export default function RegisterForm() {
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
       }
       await resetForm();
+      setIsLoggedIn(true);
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
     }

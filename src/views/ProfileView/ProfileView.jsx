@@ -4,9 +4,13 @@ import Profile from "@/components/common/Profile/Profile";
 import { useState } from "react";
 
 function Login() {
-  const [isLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return <div>{isLoggedIn ? <Profile /> : <LoginWindow />}</div>;
+  return (
+    <div>
+      {isLoggedIn ? <Profile /> : <LoginWindow setIsLoggedIn={setIsLoggedIn} />}
+    </div>
+  );
 }
 
 export default Login;
