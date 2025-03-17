@@ -1,21 +1,38 @@
-// import { CloseButton } from "@chakra-ui/react"; Для возвращения обратно на MainView
-
 import getUser from "../../../services/getUser";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Collapsible, Button } from "@chakra-ui/react";
 
 function Profile() {
-  const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await getUser("login");
-      setUserData(data);
+      const username = await sessionStorage.getItem("username");
+      const data = await getUser(username);
+      setUser(data);
     };
 
     fetch();
   }, []);
-  return userData ? (
+
+  function handleNewNote() {
+    const newNote = prompt("какую заметку добавить?");
+    if (!newNote) return;
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+  }
+
+  function handleNoteClick(note) {
+    window.confirm(`удалить заметку "${note}"?`);
+  }
+
+  function handleNavigate() {
+    navigate("/"); // Перенаправление на главную
+  }
+
+  return user ? (
     <Collapsible.Root
       maxW="400px"
       width="400px"
@@ -34,14 +51,33 @@ function Profile() {
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <p>
               <span style={{ fontWeight: "bold" }}>юзернейм: </span>
-              {userData.username}
+              {user.username}
             </p>
-            <p>
-              <span style={{ fontWeight: "bold" }}>заметки: </span>позже добавлю
-            </p>
+            {notes.map((note) => (
+              <p key={note} onClick={() => handleNoteClick(note)}>
+                <span style={{ fontWeight: "bold" }}>заметка: </span>
+                {note}
+              </p>
+            ))}
           </div>
         </Box>
-        <Button colorPalette="red" width="full">
+        <Button
+          onClick={handleNavigate}
+          marginBottom="14px"
+          colorPalette="green"
+          width="full"
+        >
+          главная
+        </Button>
+        <Button
+          onClick={handleNewNote}
+          marginBottom="14px"
+          colorPalette="blue"
+          width="full"
+        >
+          заметка
+        </Button>
+        <Button marginBottom="14px" colorPalette="red" width="full">
           лог аут
         </Button>
       </Collapsible.Content>

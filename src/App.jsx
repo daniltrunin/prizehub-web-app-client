@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route,  } from "react-router-dom";
 
 import MainView from "./views/MainView/MainView";
 import ProfileView from "./views/ProfileView/ProfileView";
