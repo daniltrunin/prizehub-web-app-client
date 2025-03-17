@@ -24,8 +24,15 @@ function Profile() {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
-  function handleNoteClick(note) {
-    window.confirm(`удалить заметку "${note}"?`);
+  function handleDeleteNote(noteToDelete) {
+    const result = window.confirm(`удалить заметку "${noteToDelete}"?`);
+    if (result) {
+      setNotes((prevNotes) =>
+        prevNotes.filter((note) => note !== noteToDelete)
+      );
+    } else {
+      return;
+    }
   }
 
   function handleNavigate() {
@@ -54,7 +61,7 @@ function Profile() {
               {user.username}
             </p>
             {notes.map((note) => (
-              <p key={note} onClick={() => handleNoteClick(note)}>
+              <p key={note} onClick={() => handleDeleteNote(note)}>
                 <span style={{ fontWeight: "bold" }}>заметка: </span>
                 {note}
               </p>

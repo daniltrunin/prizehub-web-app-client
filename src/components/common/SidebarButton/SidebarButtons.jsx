@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { LuFolder, LuGift, LuLogOut } from "react-icons/lu";
+import { LuFolder, LuGift } from "react-icons/lu";
 
 import SidebarButton from "../SidebarButton/SidebarButton";
 
@@ -19,15 +19,6 @@ function SidebarButtons() {
         <SidebarButton onClick={onClick} icon={LuGift} text="розыгрыши" />
         <SidebarButton onClick={onClick} icon={LuFolder} text="каналы" />
       </Flex>
-      <div style={{ marginTop: "auto" }}>
-        <SidebarButton
-          onClick={onClick}
-          data-type="logout"
-          color="red"
-          icon={LuLogOut}
-          text="лог аут"
-        />
-      </div>
     </div>
   );
 }
