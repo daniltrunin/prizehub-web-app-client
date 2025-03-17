@@ -45,7 +45,7 @@ export default function LoginForm({ setIsLoggedIn }) {
       await resetForm();
       setIsLoggedIn(true);
     } else if (!password.length || !username.length) {
-      alert("Заполните все поля");
+      alert("заполните все поля");
     }
   }
 
@@ -60,7 +60,7 @@ export default function LoginForm({ setIsLoggedIn }) {
           setUsername(e.target.value);
           setHasError(e.target.value.trim().length === 0);
         }}
-        placeholder="Юзернейм"
+        placeholder="юзернейм"
         variant="filled"
         style={{
           border: hasError ? "1px solid #E82E2E" : null,
@@ -72,14 +72,14 @@ export default function LoginForm({ setIsLoggedIn }) {
           setPassword(e.target.value);
           setHasError(e.target.value.trim().length === 0);
         }}
-        placeholder="Пароль"
+        placeholder="пароль"
         variant="filled"
         style={{
           border: hasError ? "1px solid #E82E2E" : null,
         }}
       />
       <CheckboxCard
-        label="Запомнить вход"
+        label="запомнить вход"
         maxW="full"
         size="sm"
         variant="outline"
@@ -87,7 +87,7 @@ export default function LoginForm({ setIsLoggedIn }) {
         checked={isChecked}
       />
       <Button width="full" type="submit">
-        Подтвердить
+        подтвердить
       </Button>
     </form>
   );

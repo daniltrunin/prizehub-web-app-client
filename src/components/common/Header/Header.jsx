@@ -15,7 +15,7 @@ function Header() {
       >
         <Input
           className={styles.input}
-          placeholder="Поиск"
+          placeholder="поиск"
           size="lg"
           borderRadius="8px"
           fontFamily="Inter"

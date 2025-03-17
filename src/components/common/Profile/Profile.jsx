@@ -15,9 +15,7 @@ function Profile() {
 
     fetch();
   }, []);
-
-  // return <div>{userData ? userData.username : <div>Loading...</div>}</div>;
-  return (
+  return userData ? (
     <Collapsible.Root
       maxW="400px"
       width="400px"
@@ -25,7 +23,7 @@ function Profile() {
       display="flex"
       flexDir="column"
     >
-      <Collapsible.Trigger marginBottom="24px">Профиль</Collapsible.Trigger>
+      <Collapsible.Trigger marginBottom="24px">профиль</Collapsible.Trigger>
       <Collapsible.Content>
         <Box
           justifyContent="center"
@@ -34,15 +32,22 @@ function Profile() {
           marginBottom="24px"
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <p>Юзернейм: {userData.username}</p>
-            <p>Lorem ipsum dolor sit amet consectetur</p>
+            <p>
+              <span style={{ fontWeight: "bold" }}>юзернейм: </span>
+              {userData.username}
+            </p>
+            <p>
+              <span style={{ fontWeight: "bold" }}>заметки: </span>позже добавлю
+            </p>
           </div>
         </Box>
         <Button colorPalette="red" width="full">
-          Лог аут
+          лог аут
         </Button>
       </Collapsible.Content>
     </Collapsible.Root>
+  ) : (
+    <div style={{ marginTop: "100px" }}>загрузка...</div>
   );
 }
 

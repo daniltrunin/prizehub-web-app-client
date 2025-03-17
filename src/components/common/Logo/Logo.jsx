@@ -6,7 +6,7 @@ function Logo() {
   return (
     <Flex direction="row" gap="8px" align="center">
       <Image src={logo} height="20px" width="20px"></Image>
-      <Heading size="2xl">ПрайзХаб</Heading>
+      <Heading size="2xl">прайзхаб</Heading>
     </Flex>
   );
 }

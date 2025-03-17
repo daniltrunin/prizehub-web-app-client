@@ -16,8 +16,8 @@ function SidebarButtons() {
       }}
     >
       <Flex direction="column" gap="20px" width="200px">
-        <SidebarButton onClick={onClick} icon={LuGift} text="Розыгрыши" />
-        <SidebarButton onClick={onClick} icon={LuFolder} text="Каналы" />
+        <SidebarButton onClick={onClick} icon={LuGift} text="розыгрыши" />
+        <SidebarButton onClick={onClick} icon={LuFolder} text="каналы" />
       </Flex>
       <div style={{ marginTop: "auto" }}>
         <SidebarButton
@@ -25,7 +25,7 @@ function SidebarButtons() {
           data-type="logout"
           color="red"
           icon={LuLogOut}
-          text="Лог аут"
+          text="лог аут"
         />
       </div>
     </div>
