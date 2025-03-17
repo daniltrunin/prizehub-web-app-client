@@ -29,7 +29,7 @@ function Profile() {
   }
 
   function handleNavigate() {
-    navigate("/"); // Перенаправление на главную
+    navigate("/");
   }
 
   return user ? (

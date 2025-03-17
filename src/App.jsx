@@ -1,22 +1,14 @@
 import "./App.css";
 
-import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route,  } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import MainView from "./views/MainView/MainView";
 import ProfileView from "./views/ProfileView/ProfileView";
 
 function App() {
   // если есть данные в sessionStorage, то открывает default, если нет, то открывает /profile
-  const [loggedIn, setLoggedIn] = useState(null);
 
-  useEffect(() => {
-    // более короткая запись варианта: let data = sessionStorage.getItem("username") !== null;
-    let data = !!sessionStorage.getItem("username");
-    setLoggedIn(data);
-  }, []);
-
-  if (loggedIn === null) {
+  if (!sessionStorage.getItem("username")) {
     return <div style={{ marginTop: "50px" }}>Загрузка...</div>;
   }
 
@@ -26,7 +18,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={loggedIn ? <MainView /> : <Navigate to="/profile" />}
+            element={
+              sessionStorage.getItem("username") ? (
+                <MainView />
+              ) : (
+                <Navigate to="/profile" />
+              )
+            }
           />
           <Route path="/profile" element={<ProfileView />} />
         </Routes>

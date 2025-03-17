@@ -4,7 +4,7 @@ import { Tabs } from "@chakra-ui/react";
 import LoginForm from "../Identification/Login";
 import RegisterForm from "../Identification/Register";
 
-function LoginWindow({ setIsLoggedIn }) {
+function LoginWindow() {
   return (
     <div
       style={{
@@ -23,10 +23,10 @@ function LoginWindow({ setIsLoggedIn }) {
           <Tabs.Trigger value="register">регистрация</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="login">
-          <LoginForm setIsLoggedIn={setIsLoggedIn} />
+          <LoginForm />
         </Tabs.Content>
         <Tabs.Content value="register">
-          <RegisterForm setIsLoggedIn={setIsLoggedIn} />
+          <RegisterForm />
         </Tabs.Content>
       </Tabs.Root>
     </div>
