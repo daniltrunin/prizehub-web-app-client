@@ -39,6 +39,16 @@ function Profile() {
     navigate("/");
   }
 
+  function handleLogout() {
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("password");
+    
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+
+    location.reload();
+  }
+
   return user ? (
     <Collapsible.Root
       maxW="400px"
@@ -84,7 +94,12 @@ function Profile() {
         >
           заметка
         </Button>
-        <Button marginBottom="14px" colorPalette="red" width="full">
+        <Button
+          onClick={handleLogout}
+          marginBottom="14px"
+          colorPalette="red"
+          width="full"
+        >
           лог аут
         </Button>
       </Collapsible.Content>
