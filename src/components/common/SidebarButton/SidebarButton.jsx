@@ -1,14 +1,13 @@
 import { Button } from "@chakra-ui/react";
 
-function SidebarButton({ text, icon: Icon, color, onClick }) {
+function SidebarButton({ text, icon: Icon, onClick }) {
   return (
     <Button
-      onClick={(event) => onClick(event)}
       size="xl"
       variant="solid"
       rounded="lg"
       width="full"
-      colorPalette={color}
+      onClick={onClick}
     >
       {Icon && <Icon size={24} />}
       {text}

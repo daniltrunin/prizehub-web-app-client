@@ -4,9 +4,14 @@ import { LuFolder, LuGift } from "react-icons/lu";
 import SidebarButton from "../SidebarButton/SidebarButton";
 
 function SidebarButtons() {
-  function onClick(event) {
-    console.log(event.currentTarget.textContent);
-  }
+  const handleRafflesClick = () => {
+    console.log("Клик по 'Розыгрыши'");
+  };
+
+  const handleChannelsClick = () => {
+    console.log("Клик по 'Каналы'");
+  };
+
   return (
     <div
       style={{
@@ -16,8 +21,16 @@ function SidebarButtons() {
       }}
     >
       <Flex direction="column" gap="20px" width="200px">
-        <SidebarButton onClick={onClick} icon={LuGift} text="розыгрыши" />
-        <SidebarButton onClick={onClick} icon={LuFolder} text="каналы" />
+        <SidebarButton
+          onClick={handleRafflesClick}
+          icon={LuGift}
+          text="Розыгрыши"
+        />
+        <SidebarButton
+          onClick={handleChannelsClick}
+          icon={LuFolder}
+          text="Каналы"
+        />
       </Flex>
     </div>
   );

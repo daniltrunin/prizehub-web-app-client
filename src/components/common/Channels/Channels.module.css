@@ -1,0 +1,12 @@
+.container {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  gap: 32px;
+
+  padding: 56px 0px 56px 64px;
+
+  width: 90%;
+  max-width: 100%;
+}

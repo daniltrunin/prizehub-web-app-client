@@ -42,7 +42,7 @@ function Profile() {
   function handleLogout() {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("password");
-    
+
     localStorage.removeItem("username");
     localStorage.removeItem("password");
 
@@ -57,7 +57,7 @@ function Profile() {
       display="flex"
       flexDir="column"
     >
-      <Collapsible.Trigger marginBottom="24px">профиль</Collapsible.Trigger>
+      <Collapsible.Trigger marginBottom="24px">Профиль</Collapsible.Trigger>
       <Collapsible.Content>
         <Box
           justifyContent="center"
@@ -67,12 +67,12 @@ function Profile() {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <p>
-              <span style={{ fontWeight: "bold" }}>юзернейм: </span>
+              <span style={{ fontWeight: "bold" }}>Имя: </span>
               {user.username}
             </p>
             {notes.map((note) => (
               <p key={note} onClick={() => handleDeleteNote(note)}>
-                <span style={{ fontWeight: "bold" }}>заметка: </span>
+                <span style={{ fontWeight: "bold" }}>Заметка: </span>
                 {note}
               </p>
             ))}
@@ -84,7 +84,7 @@ function Profile() {
           colorPalette="green"
           width="full"
         >
-          главная
+          Главная
         </Button>
         <Button
           onClick={handleNewNote}
@@ -92,7 +92,7 @@ function Profile() {
           colorPalette="blue"
           width="full"
         >
-          заметка
+          Новая заметка
         </Button>
         <Button
           onClick={handleLogout}
@@ -100,12 +100,12 @@ function Profile() {
           colorPalette="red"
           width="full"
         >
-          лог аут
+          Лог аут
         </Button>
       </Collapsible.Content>
     </Collapsible.Root>
   ) : (
-    <div style={{ marginTop: "100px" }}>загрузка...</div>
+    <div style={{ marginTop: "100px" }}>Загрузка...</div>
   );
 }
 

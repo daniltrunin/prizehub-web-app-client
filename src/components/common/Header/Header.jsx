@@ -1,7 +1,7 @@
 import { InputGroup } from "@/components/ui/input-group";
 import { Avatar, Input } from "@chakra-ui/react";
 import { LuSearch } from "react-icons/lu";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import styles from "./Header.module.css";
 
@@ -15,7 +15,7 @@ function Header() {
       >
         <Input
           className={styles.input}
-          placeholder="поиск"
+          placeholder="Поиск"
           size="lg"
           borderRadius="8px"
           fontFamily="Inter"
