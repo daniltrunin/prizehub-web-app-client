@@ -53,7 +53,7 @@ export default function RegisterForm() {
       }
       await resetFormAndReload();
     } else if (!password.length || !username.length) {
-      alert("заполните все поля");
+      alert("Заполните все поля");
     }
   }
 
@@ -68,7 +68,7 @@ export default function RegisterForm() {
           setUsername(e.target.value);
           setHasError(e.target.value.trim().length === 0);
         }}
-        placeholder="юзернейм"
+        placeholder="Имя пользователя"
         variant="filled"
         style={{
           border: hasError ? "1px solid #E82E2E" : null,
@@ -81,7 +81,7 @@ export default function RegisterForm() {
             setPassword(e.target.value);
             setHasError(e.target.value.trim().length === 0);
           }}
-          placeholder="пароль"
+          placeholder="Пароль"
           variant="filled"
           style={{
             border: hasError ? "1px solid #E82E2E" : null,
@@ -90,7 +90,7 @@ export default function RegisterForm() {
         <PasswordStrengthMeter width="full" value={passwordStrength} />
       </Stack>
       <CheckboxCard
-        label="запомнить вход"
+        label="Запомнить вход"
         maxW="full"
         size="sm"
         variant="outline"
@@ -98,7 +98,7 @@ export default function RegisterForm() {
         checked={isChecked}
       />
       <Button width="full" type="submit">
-        подтвердить
+        Подтвердить
       </Button>
     </form>
   );

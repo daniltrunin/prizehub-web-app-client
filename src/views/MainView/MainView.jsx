@@ -6,7 +6,12 @@ function Main() {
   return (
     <div style={{ display: "flex", width: "100%" }}>
       <Sidebar />
-      <div style={{ maxWidth: "100%", width: "100%" }}>
+      <div
+        style={{
+          maxWidth: "100%",
+          width: "100%",
+        }}
+      >
         <Header />
         <Channels />
       </div>

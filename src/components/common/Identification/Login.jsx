@@ -46,7 +46,7 @@ export default function LoginForm() {
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
       }
     } else if (!password.length || !username.length) {
-      alert("заполните все поля");
+      alert("Заполните все поля");
     }
   }
 
@@ -61,7 +61,7 @@ export default function LoginForm() {
           setUsername(e.target.value);
           setHasError(e.target.value.trim().length === 0);
         }}
-        placeholder="юзернейм"
+        placeholder="Имя пользователя"
         variant="filled"
         style={{
           border: hasError ? "1px solid #E82E2E" : null,
@@ -73,14 +73,14 @@ export default function LoginForm() {
           setPassword(e.target.value);
           setHasError(e.target.value.trim().length === 0);
         }}
-        placeholder="пароль"
+        placeholder="Пароль"
         variant="filled"
         style={{
           border: hasError ? "1px solid #E82E2E" : null,
         }}
       />
       <CheckboxCard
-        label="запомнить вход"
+        label="Запомнить вход"
         maxW="full"
         size="sm"
         variant="outline"
@@ -88,7 +88,7 @@ export default function LoginForm() {
         checked={isChecked}
       />
       <Button width="full" type="submit">
-        подтвердить
+        Подтвердить
       </Button>
     </form>
   );

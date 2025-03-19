@@ -1,74 +1,64 @@
 import styles from "./Channels.module.css";
 
-import { Button, Card } from "@chakra-ui/react";
+import { Button, Dialog, Portal } from "@chakra-ui/react";
 
 import { useState } from "react";
 
 export default function Channels() {
   const [channels, setChannels] = useState([
     {
-      name: "Канал 1",
-      description: "Описание канала 1",
+      name: "BetClub",
+      description: `BetClub es un club para aquellos que no solo quieren hacer apuestas, sino también ganar.
+
+✅ DM @leo_betclub_bot
+
+📲 Para amigos: https://t.me/+LWwRBKxHgVI3ZGIy`,
     },
     {
-      name: "Канал 2",
-      description: "Описание канала 2",
+      name: "Клатч! — новости CS2",
+      description: `💰 Крутые розыгрыши и новости киберспорта. Тебе точно понравится!
+
+Наши каналы - https://t.me/cybermediatg
+
+🤝 Реклама/сотрудничество - @clutchnews_admin`,
     },
     {
-      name: "Канал 3",
-      description: "Описание канала 3",
-    },
-    {
-      name: "Канал 4",
-      description: "Описание канала 4",
-    },
-    {
-      name: "Канал 5",
-      description: "Описание канала 5",
-    },
-    {
-      name: "Канал 6",
-      description: "Описание канала 6",
-    },
-    {
-      name: "Канал 1",
-      description: "Описание канала 1",
-    },
-    {
-      name: "Канал 2",
-      description: "Описание канала 2",
-    },
-    {
-      name: "Канал 3",
-      description: "Описание канала 3",
-    },
-    {
-      name: "Канал 4",
-      description: "Описание канала 4",
-    },
-    {
-      name: "Канал 5",
-      description: "Описание канала 5",
-    },
-    {
-      name: "Канал 6",
-      description: "Описание канала 6",
+      name: "Kick Off TV",
+      description: `Kick Off TV – твой главный источник футбольных новостей и трансляций ⚽️. Прямые эфиры 🎥, аналитика 📊 и интервью 🎤 с ведущими 
+игроками и тренерами. От локальных матчей до мировых турниров 🌍
+
+Для друзей https://t.me/+g-CTlAaFf7wzZTU6`,
     },
   ]);
   return (
     <div className={styles.container}>
       {channels.map((channel) => (
-        <Card.Root key={channel.name} variant="subtle" minW="300px">
-          <Card.Body gap="2">
-            <Card.Title mt="2">{channel.name}</Card.Title>
-            <Card.Description>{channel.description}</Card.Description>
-          </Card.Body>
-          <Card.Footer justifyContent="flex-end">
-            <Button colorPalette="red" width="full">
-              Удалить
+        <Dialog.Root key={channel.name}>
+          <Dialog.Trigger asChild>
+            <Button height="80px" variant="subtle" size="md">
+              {channel.name}
             </Button>
-          </Card.Footer>
-        </Card.Root>
+          </Dialog.Trigger>
+          <Portal>
+            <Dialog.Backdrop />
+            <Dialog.Positioner>
+              <Dialog.Content>
+                <Dialog.Header>
+                  <Dialog.Title>{channel.name}</Dialog.Title>
+                </Dialog.Header>
+                <Dialog.Body>
+                  <p>{channel.description}</p>
+                </Dialog.Body>
+                <Dialog.Footer>
+                  <Dialog.ActionTrigger asChild>
+                    <Button variant="outline">Закрыть</Button>
+                  </Dialog.ActionTrigger>
+                  <Button colorPalette="red">Удалить</Button>
+                </Dialog.Footer>
+              </Dialog.Content>
+            </Dialog.Positioner>
+          </Portal>
+        </Dialog.Root>
       ))}
     </div>
   );

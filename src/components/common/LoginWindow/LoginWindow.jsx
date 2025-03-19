@@ -19,8 +19,8 @@ function LoginWindow() {
     >
       <Tabs.Root width="full" defaultValue="loginwindow" variant="subtle">
         <Tabs.List width="full" justifyContent="center">
-          <Tabs.Trigger value="login">логин</Tabs.Trigger>
-          <Tabs.Trigger value="register">регистрация</Tabs.Trigger>
+          <Tabs.Trigger value="login">Логин</Tabs.Trigger>
+          <Tabs.Trigger value="register">Регистрация</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="login">
           <LoginForm />

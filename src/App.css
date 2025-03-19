@@ -5,10 +5,14 @@
 }
 
 .app {
-  width: 100vw;
+  width: 95vw;
   max-width: 1920px;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
 }
