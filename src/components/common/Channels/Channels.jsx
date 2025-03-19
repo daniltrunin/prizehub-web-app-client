@@ -17,7 +17,6 @@ export default function Channels() {
     setChannels((prevChannels) =>
       prevChannels.filter((channel) => channel.name !== channelName)
     );
-    alert(`${channelName} был удалён`);
   }
 
   return (
@@ -46,9 +45,10 @@ export default function Channels() {
           </Dialog.Positioner>
         </Portal>
       </Dialog.Root>
-      <div className={styles.channels}>
-        {channels.length > 0 ? (
-          channels.map((channel) => (
+
+      {channels.length > 0 ? (
+        <div className={styles.channels}>
+          {channels.map((channel) => (
             <Dialog.Root key={channel.name}>
               <Dialog.Trigger asChild>
                 <Button height="80px" variant="subtle" size="md">
@@ -80,11 +80,11 @@ export default function Channels() {
                 </Dialog.Positioner>
               </Portal>
             </Dialog.Root>
-          ))
-        ) : (
-          <Empty />
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 }
