@@ -8,8 +8,8 @@ import Empty from "../Empty/Empty.jsx";
 export default function Channels() {
   const [channels, setChannels] = useState([
     {
-      name: "канал",
-      description: "описание",
+      name: "Канал",
+      description: "Описание",
     },
   ]);
 
@@ -23,7 +23,7 @@ export default function Channels() {
     <div className={styles.container}>
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <Button variant="subtle" size="sm">
+          <Button variant="subtle" size="md">
             Добавить канал
           </Button>
         </Dialog.Trigger>

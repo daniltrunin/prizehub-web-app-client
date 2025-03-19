@@ -1,7 +1,7 @@
 import getUser from "../../../services/getUser";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Collapsible, Button } from "@chakra-ui/react";
+import { Box, Collapsible, Button, Spinner } from "@chakra-ui/react";
 
 function Profile() {
   const navigate = useNavigate();
@@ -105,7 +105,9 @@ function Profile() {
       </Collapsible.Content>
     </Collapsible.Root>
   ) : (
-    <div style={{ marginTop: "100px" }}>Загрузка...</div>
+    <div style={{ marginTop: "100px" }}>
+      <Spinner size="sm" />
+    </div>
   );
 }
 
