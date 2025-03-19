@@ -1,4 +1,11 @@
 .container {
+  display: flex;
+  flex-direction: column;
+
+  padding: 56px 64px 56px 64px;
+}
+
+.channels {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
@@ -8,9 +15,9 @@
 
   gap: 24px;
 
-  padding: 56px 64px 56px 64px;
-
   width: 100%;
 
   overflow: hidden;
+
+  margin-top: 24px;
 }
