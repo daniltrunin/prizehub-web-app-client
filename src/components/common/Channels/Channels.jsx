@@ -30,6 +30,14 @@ export default function Channels() {
 Для друзей https://t.me/+g-CTlAaFf7wzZTU6`,
     },
   ]);
+
+  function handleDeleteChannel(channelName) {
+    setChannels((prevChannels) =>
+      prevChannels.filter((channel) => channel.name !== channelName)
+    );
+    alert(`${channelName} был удалён`);
+  }
+
   return (
     <div className={styles.container}>
       {channels.map((channel) => (
@@ -53,7 +61,12 @@ export default function Channels() {
                   <Dialog.ActionTrigger asChild>
                     <Button variant="outline">Закрыть</Button>
                   </Dialog.ActionTrigger>
-                  <Button colorPalette="red">Удалить</Button>
+                  <Button
+                    onClick={() => handleDeleteChannel(channel.name)}
+                    colorPalette="red"
+                  >
+                    Удалить
+                  </Button>
                 </Dialog.Footer>
               </Dialog.Content>
             </Dialog.Positioner>
