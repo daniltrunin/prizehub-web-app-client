@@ -121,7 +121,7 @@ function Profile() {
                             }}
                           >
                             <Popover.Title fontWeight="medium">
-                              Удалить {note}?
+                              {note}
                             </Popover.Title>
                             <Button
                               onClick={() => handleDeleteNote(note)}
