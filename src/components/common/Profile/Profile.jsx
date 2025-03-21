@@ -1,4 +1,5 @@
 import getUser from "../../../services/getUser";
+import getNotes from "../../../services/getNotes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Collapsible, Button, Spinner } from "@chakra-ui/react";
@@ -17,6 +18,16 @@ function Profile() {
 
     fetch();
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    const fetch = async () => {
+      const notes = await getNotes(user.username);
+      setNotes(notes.notes);
+    };
+
+    fetch();
+  }, [user]);
 
   function handleNewNote() {
     const newNote = prompt("какую заметку добавить?");
@@ -48,7 +59,7 @@ function Profile() {
 
     location.reload();
   }
-
+  // console.log("📌 Тип данных notes:", typeof notes, Array.isArray(notes));
   return user ? (
     <Collapsible.Root
       maxW="400px"
@@ -70,12 +81,13 @@ function Profile() {
               <span style={{ fontWeight: "bold" }}>Имя: </span>
               {user.username}
             </p>
-            {notes.map((note) => (
-              <p key={note} onClick={() => handleDeleteNote(note)}>
-                <span style={{ fontWeight: "bold" }}>Заметка: </span>
-                {note}
-              </p>
-            ))}
+            {Array.isArray(notes) &&
+              notes.map((note) => (
+                <p key={note} onClick={() => handleDeleteNote(note)}>
+                  <span style={{ fontWeight: "bold" }}>Заметка: </span>
+                  {note}
+                </p>
+              ))}
           </div>
         </Box>
         <Button
