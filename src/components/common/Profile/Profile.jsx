@@ -1,9 +1,17 @@
 import getUser from "../../../services/getUser";
 import getNotes from "../../../services/getNotes";
 import addNote from "../../../services/addNote";
+import deleteNote from "../../../services/deleteNote";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Collapsible, Button, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Collapsible,
+  Button,
+  Spinner,
+  Popover,
+  Portal,
+} from "@chakra-ui/react";
 
 function Profile() {
   const navigate = useNavigate();
@@ -31,24 +39,26 @@ function Profile() {
   }, [user]);
 
   async function handleNewNote() {
-    const newNote = prompt("какую заметку добавить?");
-    if (!newNote) return;
+    const newNote = prompt("Какую заметку добавить?");
     const data = {
       username: user.username,
       note: newNote,
     };
+    if (!newNote) return;
     await addNote(data);
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
   function handleDeleteNote(noteToDelete) {
-    const result = window.confirm(`удалить заметку "${noteToDelete}"?`);
-    if (result) {
+    const data = {
+      username: user.username,
+      note: noteToDelete,
+    };
+    if (noteToDelete) {
+      deleteNote(data);
       setNotes((prevNotes) =>
         prevNotes.filter((note) => note !== noteToDelete)
       );
-    } else {
-      return;
     }
   }
 
@@ -65,7 +75,6 @@ function Profile() {
 
     location.reload();
   }
-  // console.log("📌 Тип данных notes:", typeof notes, Array.isArray(notes));
   return user ? (
     <Collapsible.Root
       maxW="400px"
@@ -89,10 +98,44 @@ function Profile() {
             </p>
             {Array.isArray(notes) &&
               notes.map((note) => (
-                <p key={note} onClick={() => handleDeleteNote(note)}>
-                  <span style={{ fontWeight: "bold" }}>Заметка: </span>
-                  {note}
-                </p>
+                <div key={note}>
+                  <Popover.Root size="lg">
+                    <Popover.Trigger asChild>
+                      <div style={{ cursor: "pointer" }}>
+                        <span style={{ fontWeight: "bold", color: "#2563eb" }}>
+                          Заметка:{" "}
+                        </span>
+                        {note}
+                      </div>
+                    </Popover.Trigger>
+                    <Portal>
+                      <Popover.Positioner>
+                        <Popover.Content>
+                          <Popover.Arrow />
+                          <Popover.Body
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              rowGap: "14px",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Popover.Title fontWeight="medium">
+                              Удалить {note}?
+                            </Popover.Title>
+                            <Button
+                              onClick={() => handleDeleteNote(note)}
+                              colorPalette="red"
+                              width="full"
+                            >
+                              Удалить
+                            </Button>
+                          </Popover.Body>
+                        </Popover.Content>
+                      </Popover.Positioner>
+                    </Portal>
+                  </Popover.Root>
+                </div>
               ))}
           </div>
         </Box>

@@ -8,7 +8,6 @@ export default async function getNotes(username) {
         });
 
         const result = await response.json();
-        console.log("Ответ сервера:", result);
         return result
     } catch (error) {
         console.error(error)
