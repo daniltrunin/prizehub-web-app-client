@@ -1,5 +1,6 @@
 import getUser from "../../../services/getUser";
 import getNotes from "../../../services/getNotes";
+import addNote from "../../../services/addNote";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Collapsible, Button, Spinner } from "@chakra-ui/react";
@@ -29,9 +30,14 @@ function Profile() {
     fetch();
   }, [user]);
 
-  function handleNewNote() {
+  async function handleNewNote() {
     const newNote = prompt("какую заметку добавить?");
     if (!newNote) return;
+    const data = {
+      username: user.username,
+      note: newNote,
+    };
+    await addNote(data);
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
