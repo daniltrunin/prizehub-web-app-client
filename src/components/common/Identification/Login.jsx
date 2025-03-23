@@ -36,10 +36,9 @@ export default function LoginForm() {
 
     if (password && username) {
       const data = await formUser(username, password);
-      const res = await loginRequest(data);
+      await loginRequest(data);
       await setSessionStorage(username, password);
       await resetFormAndReload();
-      console.log(res);
 
       if (isChecked) {
         await setLocalStorage(username, password);

@@ -17,12 +17,20 @@ function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetch = async () => {
-      const username = await sessionStorage.getItem("username");
-      const data = await getUser(username);
-      setUser(data);
+      try {
+        const username = await sessionStorage.getItem("username");
+        const data = await getUser(username);
+        if (!data) return;
+        setUser(data);
+      } catch (error) {
+        console.error("Ошибка при получении пользователя:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetch();
@@ -75,7 +83,25 @@ function Profile() {
 
     location.reload();
   }
-  return user ? (
+
+  if (loading) {
+    return (
+      <div style={{ marginTop: "100px" }}>
+        <Spinner size="sm" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div style={{ marginTop: "100px" }}>
+        Такого пользователя не существует или вы допустили ошибку в логине или
+        пароле
+      </div>
+    );
+  }
+
+  return (
     <Collapsible.Root
       maxW="400px"
       width="400px"
@@ -165,10 +191,6 @@ function Profile() {
         </Button>
       </Collapsible.Content>
     </Collapsible.Root>
-  ) : (
-    <div style={{ marginTop: "100px" }}>
-      <Spinner size="sm" />
-    </div>
   );
 }
 

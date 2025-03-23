@@ -15,6 +15,6 @@ export default async function getUser(user) {
         return result;
     } catch (error) {
         console.error("Ошибка:", error);
-        return null;
+        return null
     }
 }
