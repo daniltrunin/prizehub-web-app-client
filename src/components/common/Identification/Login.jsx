@@ -6,8 +6,14 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { CheckboxCard } from "@/components/ui/checkbox-card";
 import formUser from "../../../services/formUser";
 import loginRequest from "@/services/loginRequest";
-import setSessionStorage from "../../../services/sessionStorage";
-import setLocalStorage from "../../../services/localStorage";
+import {
+  removeSessionStorage,
+  setSessionStorage,
+} from "../../../services/sessionStorage";
+import {
+  removeLocalStorage,
+  setLocalStorage,
+} from "../../../services/localStorage";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -37,6 +43,8 @@ export default function LoginForm() {
     if (password && username) {
       const data = await formUser(username, password);
       await loginRequest(data);
+      await removeLocalStorage();
+      await removeSessionStorage();
       await setSessionStorage(username, password);
       await resetFormAndReload();
 

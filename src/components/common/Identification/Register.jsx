@@ -11,8 +11,14 @@ import formUser from "../../../services/formUser";
 import registerRequest from "../../../services/registerRequest";
 import zxcvbn from "zxcvbn";
 
-import setSessionStorage from "../../../services/sessionStorage";
-import setLocalStorage from "../../../services/localStorage";
+import {
+  removeSessionStorage,
+  setSessionStorage,
+} from "../../../services/sessionStorage";
+import {
+  removeLocalStorage,
+  setLocalStorage,
+} from "../../../services/localStorage";
 
 export default function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -43,15 +49,16 @@ export default function RegisterForm() {
 
     if (password && username) {
       const data = await formUser(username, password);
-      const res = await registerRequest(data);
-      console.log(res);
+      await registerRequest(data);
+      await removeLocalStorage();
+      await removeSessionStorage();
       await setSessionStorage(username, password);
+      await resetFormAndReload();
 
       if (isChecked) {
         await setLocalStorage(username, password);
         console.log(`Отправил ${username} и ${password} с сохранением сессии`);
       }
-      await resetFormAndReload();
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
     }
