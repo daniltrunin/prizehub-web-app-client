@@ -9,9 +9,8 @@ export default async function registerRequest(data) {
         });
 
         const result = await response.json();
-        console.log("Ответ сервера:", result);
+        return result
     } catch (error) {
         console.error("Ошибка:", error);
     }
-    return data
 }

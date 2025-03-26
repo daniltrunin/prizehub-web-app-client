@@ -42,7 +42,7 @@ export default function LoginForm() {
 
     if (password && username) {
       const data = await formUser(username, password);
-      await loginRequest(data);
+      const result = await loginRequest(data);
       await removeLocalStorage();
       await removeSessionStorage();
       await setSessionStorage(username, password);

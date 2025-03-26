@@ -77,9 +77,11 @@ function Profile() {
   function handleLogout() {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("password");
+    sessionStorage.removeItem("token");
 
     localStorage.removeItem("username");
     localStorage.removeItem("password");
+    localStorage.removeItem("token");
 
     location.reload();
   }

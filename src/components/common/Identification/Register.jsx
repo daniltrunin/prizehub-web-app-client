@@ -38,18 +38,19 @@ export default function RegisterForm() {
     setUsername("");
     setPassword("");
     setIsChecked(false);
-    console.log("reset form");
 
-    location.reload();
+    // location.reload();
   }
 
   /* Отправка сабмита */
   async function handleSubmit(event) {
     event.preventDefault();
+    console.log("Форма отправлена");
 
     if (password && username) {
       const data = await formUser(username, password);
-      await registerRequest(data);
+      const result = await registerRequest(data);
+      await sessionStorage.setItem("token", result.token);
       await removeLocalStorage();
       await removeSessionStorage();
       await setSessionStorage(username, password);
@@ -57,7 +58,7 @@ export default function RegisterForm() {
 
       if (isChecked) {
         await setLocalStorage(username, password);
-        console.log(`Отправил ${username} и ${password} с сохранением сессии`);
+        await localStorage.setItem("token", result.token);
       }
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
