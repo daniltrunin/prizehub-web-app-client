@@ -2,6 +2,8 @@ import getUser from "../../../services/getUser";
 import getNotes from "../../../services/getNotes";
 import addNote from "../../../services/addNote";
 import deleteNote from "../../../services/deleteNote";
+import { removeSessionStorage } from "../../../services/sessionStorage";
+import { removeLocalStorage } from "../../../services/localStorage";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -96,9 +98,27 @@ function Profile() {
 
   if (!user) {
     return (
-      <div style={{ marginTop: "100px" }}>
+      <div
+        style={{
+          marginTop: "100px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px",
+        }}
+      >
         Такого пользователя не существует или вы допустили ошибку в логине или
         пароле
+        <Button
+          onClick={() => {
+            removeSessionStorage();
+            removeLocalStorage();
+            sessionStorage.removeItem("token");
+            localStorage.removeItem("token");
+            location.reload();
+          }}
+        >
+          Перезагрузить страницу
+        </Button>
       </div>
     );
   }

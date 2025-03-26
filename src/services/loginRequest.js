@@ -7,10 +7,9 @@ export default async function loginRequest(data) {
             },
             body: JSON.stringify(data),
         });
-
-        return await response.json();
+        const result = await response.json();
+        return { status: response.status, ...result };
     } catch (error) {
         console.error("Ошибка:", error);
     }
-    return data
 }

@@ -30,16 +30,14 @@ export default function RegisterForm() {
 
   /* Нажатие чекбокса */
   const handleChange = (e) => {
-    setIsChecked(e.target.checked); // Теперь состояние обновляется
-    console.log(`Чекбокс ${e.target.checked ? "активен" : "неактивен"}`);
+    setIsChecked(e.target.checked);
   };
 
   async function resetFormAndReload() {
     setUsername("");
     setPassword("");
     setIsChecked(false);
-
-    // location.reload();
+    location.reload();
   }
 
   /* Отправка сабмита */

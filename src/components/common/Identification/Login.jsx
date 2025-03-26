@@ -30,7 +30,6 @@ export default function LoginForm() {
     setUsername("");
     setPassword("");
     setIsChecked(false);
-
     // location.reload();
   }
 
@@ -41,15 +40,19 @@ export default function LoginForm() {
     if (password && username) {
       const data = await formUser(username, password);
       const result = await loginRequest(data);
-      await localStorage.setItem("token", result.token);
-      await sessionStorage.setItem("token", result.token);
-      await removeLocalStorage();
-      await removeSessionStorage();
-      await setSessionStorage(username, password);
-      await resetFormAndReload();
+      if (result.status == "200") {
+        await sessionStorage.setItem("token", result.token);
+        await removeLocalStorage();
+        await removeSessionStorage();
+        await setSessionStorage(username, password);
+        await resetFormAndReload();
 
-      if (isChecked) {
-        await setLocalStorage(username, password);
+        if (isChecked) {
+          await setLocalStorage(username, password);
+          await localStorage.setItem("token", result.token);
+        }
+      } else if (result.status == "401" || result.status == "500") {
+        alert("Ошибка при логине");
       }
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");

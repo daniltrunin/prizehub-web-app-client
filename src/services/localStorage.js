@@ -4,6 +4,6 @@ export function setLocalStorage(username, password) {
 }
 
 export function removeLocalStorage() {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("password");
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
 }
