@@ -8,8 +8,7 @@ export default async function loginRequest(data) {
             body: JSON.stringify(data),
         });
 
-        const result = await response.json();
-        console.log("Ответ сервера:", result);
+        return await response.json();
     } catch (error) {
         console.error("Ошибка:", error);
     }

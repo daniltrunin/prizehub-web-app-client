@@ -24,16 +24,14 @@ export default function LoginForm() {
   /* Нажатие чекбокса */
   const handleChange = (e) => {
     setIsChecked(e.target.checked);
-    console.log(`Чекбокс ${e.target.checked ? "активен" : "неактивен"}`);
   };
 
   async function resetFormAndReload() {
     setUsername("");
     setPassword("");
     setIsChecked(false);
-    console.log("reset form");
 
-    location.reload();
+    // location.reload();
   }
 
   /* Отправка сабмита */
@@ -43,6 +41,8 @@ export default function LoginForm() {
     if (password && username) {
       const data = await formUser(username, password);
       const result = await loginRequest(data);
+      await localStorage.setItem("token", result.token);
+      await sessionStorage.setItem("token", result.token);
       await removeLocalStorage();
       await removeSessionStorage();
       await setSessionStorage(username, password);
@@ -50,7 +50,6 @@ export default function LoginForm() {
 
       if (isChecked) {
         await setLocalStorage(username, password);
-        console.log(`Отправил ${username} и ${password} с сохранением сессии`);
       }
     } else if (!password.length || !username.length) {
       alert("Заполните все поля");
