@@ -30,7 +30,7 @@ export default function LoginForm() {
     setUsername("");
     setPassword("");
     setIsChecked(false);
-    // location.reload();
+    location.reload();
   }
 
   /* Отправка сабмита */

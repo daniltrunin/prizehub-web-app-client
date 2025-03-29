@@ -40,9 +40,21 @@ function Profile() {
 
   useEffect(() => {
     if (!user) return;
+    if (!sessionStorage.getItem("token")) {
+      setUser(null);
+      return;
+    }
     const fetch = async () => {
-      const notes = await getNotes(user.username);
-      setNotes(notes.notes);
+      const data = {
+        username: user.username,
+        token: sessionStorage.getItem("token"),
+      };
+      const notes = await getNotes(data);
+      if (notes.notes) {
+        setNotes(notes.notes);
+      } else {
+        setUser(notes.notes);
+      }
     };
 
     fetch();
