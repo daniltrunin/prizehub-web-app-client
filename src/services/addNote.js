@@ -9,7 +9,6 @@ export default async function addNote(data) {
         })
         return response
     } catch (error) {
-        console.error(`Ошибка добавления заметки: ${error}`);
+        throw Error(error)
     }
-    return data
 }

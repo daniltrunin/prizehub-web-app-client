@@ -65,10 +65,15 @@ function Profile() {
     const data = {
       username: user.username,
       note: newNote,
+      token: sessionStorage.getItem("token"),
     };
     if (!newNote) return;
-    await addNote(data);
-    setNotes((prevNotes) => [...prevNotes, newNote]);
+    const res = await addNote(data);
+    if (res.status == "200") {
+      setNotes((prevNotes) => [...prevNotes, newNote]);
+    } else {
+      return;
+    }
   }
 
   function handleDeleteNote(noteToDelete) {
