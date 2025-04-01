@@ -23,11 +23,17 @@ function Profile() {
 
   useEffect(() => {
     const fetch = async () => {
+      const user = {
+        username: sessionStorage.getItem("username"),
+        token: sessionStorage.getItem("token"),
+      };
       try {
-        const username = await sessionStorage.getItem("username");
-        const data = await getUser(username);
-        if (!data) return;
-        setUser(data);
+        const res = await getUser(user);
+        if (res) {
+          setUser(res);
+        } else {
+          return;
+        }
       } catch (error) {
         console.error("Ошибка при получении пользователя:", error);
       } finally {
@@ -84,7 +90,6 @@ function Profile() {
     };
     if (noteToDelete) {
       const res = await deleteNote(data);
-      console.log(res);
       if (res.status == "200") {
         setNotes((prevNotes) =>
           prevNotes.filter((note) => note !== noteToDelete)

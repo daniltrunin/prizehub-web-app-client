@@ -1,10 +1,11 @@
 export default async function getUser(user) {
     try {
         const response = await fetch(`http://localhost:5000/users/${user}`, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(user)
         });
 
         if (!response.ok) {
