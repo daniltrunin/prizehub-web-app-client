@@ -76,16 +76,22 @@ function Profile() {
     }
   }
 
-  function handleDeleteNote(noteToDelete) {
+  async function handleDeleteNote(noteToDelete) {
     const data = {
       username: user.username,
       note: noteToDelete,
+      token: sessionStorage.getItem("token"),
     };
     if (noteToDelete) {
-      deleteNote(data);
-      setNotes((prevNotes) =>
-        prevNotes.filter((note) => note !== noteToDelete)
-      );
+      const res = await deleteNote(data);
+      console.log(res);
+      if (res.status == "200") {
+        setNotes((prevNotes) =>
+          prevNotes.filter((note) => note !== noteToDelete)
+        );
+      } else {
+        return;
+      }
     }
   }
 
