@@ -2,6 +2,7 @@ import getUser from "../../../services/getUser";
 import getNotes from "../../../services/getNotes";
 import addNote from "../../../services/addNote";
 import deleteNote from "../../../services/deleteNote";
+import logout from "../../../services/logout";
 import { removeSessionStorage } from "../../../services/sessionStorage";
 import { removeLocalStorage } from "../../../services/localStorage";
 import { useEffect, useState } from "react";
@@ -113,6 +114,8 @@ function Profile() {
     localStorage.removeItem("password");
     localStorage.removeItem("token");
 
+    logout();
+
     location.reload();
   }
 
@@ -159,7 +162,9 @@ function Profile() {
       display="flex"
       flexDir="column"
     >
-      <Collapsible.Trigger marginBottom="24px">Профиль</Collapsible.Trigger>
+      <Collapsible.Trigger marginBottom="24px">
+        <Button width="full">Профиль</Button>
+      </Collapsible.Trigger>
       <Collapsible.Content>
         <Box
           justifyContent="center"
