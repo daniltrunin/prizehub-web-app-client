@@ -2,7 +2,7 @@ import getUser from "../../../services/getUser";
 import getNotes from "../../../services/getNotes";
 import addNote from "../../../services/addNote";
 import deleteNote from "../../../services/deleteNote";
-import logout from "../../../services/logout";
+import logoutRequest from "../../../services/logoutRequest";
 import { removeSessionStorage } from "../../../services/sessionStorage";
 import { removeLocalStorage } from "../../../services/localStorage";
 import { useEffect, useState } from "react";
@@ -105,18 +105,22 @@ function Profile() {
     navigate("/");
   }
 
-  function handleLogout() {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("password");
-    sessionStorage.removeItem("token");
+  async function handleLogout() {
+    const data = {
+      username: sessionStorage.getItem("username"),
+      token: sessionStorage.getItem("token"),
+    };
 
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-    localStorage.removeItem("token");
-
-    logout();
-
-    location.reload();
+    const res = await logoutRequest(data);
+    if (res.status == "200") {
+      removeLocalStorage();
+      removeSessionStorage();
+      sessionStorage.removeItem("token");
+      localStorage.removeItem("token");
+      location.reload();
+    } else {
+      return;
+    }
   }
 
   if (loading) {
