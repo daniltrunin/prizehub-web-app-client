@@ -6,11 +6,10 @@ import MainView from "./views/MainView/MainView";
 import ProfileView from "./views/ProfileView/ProfileView";
 
 function App() {
-  // если есть данные в sessionStorage, то открывает default, если нет, то открывает /profile
-
-  // if (!sessionStorage.getItem("username")) {
-  //   return <div style={{ marginTop: "50px" }}>загрузка...</div>;
-  // }
+  /* если есть данные в sessionStorage, то открывает default, если нет, то открывает /profile
+   if (!sessionStorage.getItem("username")) {
+   return <div style={{ marginTop: "50px" }}>загрузка...</div>;
+   } */
 
   return (
     <div className="app">

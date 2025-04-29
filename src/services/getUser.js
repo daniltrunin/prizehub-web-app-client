@@ -1,6 +1,8 @@
+import serverUrl from './server';
+
 export default async function getUser(user) {
     try {
-        const response = await fetch(`http://localhost:5000/users/${user}`, {
+        const response = await fetch(`${serverUrl}/users/${user}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

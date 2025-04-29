@@ -3,17 +3,19 @@ import getNotes from "../../../services/getNotes";
 import addNote from "../../../services/addNote";
 import deleteNote from "../../../services/deleteNote";
 import logoutRequest from "../../../services/logoutRequest";
+import addBotToken from "@/services/addBotToken";
 import { removeSessionStorage } from "../../../services/sessionStorage";
 import { removeLocalStorage } from "../../../services/localStorage";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
-  Collapsible,
   Button,
   Spinner,
   Popover,
   Portal,
+  Dialog,
+  Input,
 } from "@chakra-ui/react";
 
 function Profile() {
@@ -21,6 +23,7 @@ function Profile() {
   const [user, setUser] = useState(null);
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [botToken, setBotToken] = useState("");
 
   useEffect(() => {
     const fetch = async () => {
@@ -123,6 +126,11 @@ function Profile() {
     }
   }
 
+  async function handleAddBotToken(user, token) {
+    await addBotToken(user.username, token);
+    location.reload();
+  }
+
   if (loading) {
     return (
       <div style={{ marginTop: "100px" }}>
@@ -159,17 +167,14 @@ function Profile() {
   }
 
   return (
-    <Collapsible.Root
+    <Box
       maxW="400px"
       width="400px"
       paddingY="100px"
       display="flex"
       flexDir="column"
     >
-      <Collapsible.Trigger marginBottom="24px">
-        <Button width="full">Профиль</Button>
-      </Collapsible.Trigger>
-      <Collapsible.Content>
+      <Box>
         <Box
           justifyContent="center"
           alignItems="center"
@@ -177,9 +182,13 @@ function Profile() {
           marginBottom="24px"
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <p>
+            <p style={{ textAlign: "center" }}>
               <span style={{ fontWeight: "bold" }}>Имя: </span>
               {user.username}
+            </p>
+            <p style={{ textAlign: "center" }}>
+              <span style={{ fontWeight: "bold" }}>Токен бота: </span>
+              {user.botToken}
             </p>
             {Array.isArray(notes) &&
               notes.map((note) => (
@@ -240,6 +249,42 @@ function Profile() {
         >
           Новая заметка
         </Button>
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <Button
+              variant="solid"
+              width="full"
+              colorPalette="yellow"
+              marginBottom="14px"
+            >
+              Добавить нового бота
+            </Button>
+          </Dialog.Trigger>
+          <Portal>
+            <Dialog.Backdrop />
+            <Dialog.Positioner>
+              <Dialog.Content>
+                <Dialog.Header>
+                  <Dialog.Title>Вставьте токен бота</Dialog.Title>
+                </Dialog.Header>
+                <Dialog.Body>
+                  <Input
+                    value={botToken}
+                    onChange={(e) => setBotToken(e.target.value)}
+                  ></Input>
+                </Dialog.Body>
+                <Dialog.Footer>
+                  <Dialog.ActionTrigger asChild>
+                    <Button variant="outline">Закрыть</Button>
+                  </Dialog.ActionTrigger>
+                  <Button onClick={() => handleAddBotToken(user, botToken)}>
+                    Сохранить
+                  </Button>
+                </Dialog.Footer>
+              </Dialog.Content>
+            </Dialog.Positioner>
+          </Portal>
+        </Dialog.Root>
         <Button
           onClick={handleLogout}
           marginBottom="14px"
@@ -248,8 +293,8 @@ function Profile() {
         >
           Лог аут
         </Button>
-      </Collapsible.Content>
-    </Collapsible.Root>
+      </Box>
+    </Box>
   );
 }
 

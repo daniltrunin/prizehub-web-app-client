@@ -1,6 +1,8 @@
+import serverUrl from './server';
+
 async function logoutRequest(data) {
     try {
-        const response = await fetch("http://localhost:5000/auth/logout", {
+        const response = await fetch(`${serverUrl}/auth/logout`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

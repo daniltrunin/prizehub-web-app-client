@@ -1,6 +1,8 @@
+import serverUrl from './server';
+
 export default async function getNotes(data) {
     try {
-        const response = await fetch(`http://localhost:5000/notes/get`, {
+        const response = await fetch(`${serverUrl}/notes/get`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
